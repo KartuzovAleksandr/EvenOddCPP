@@ -285,7 +285,7 @@ double measure_average_time_array(const int* original, int n, void (*func)(int*,
 int main() {
     setlocale(LC_ALL, "RU");
     const int N = 1'000'000;
-    const int RUNS = 50;
+    const int RUNS = 100;
 
     // Генерация случайных чисел
     std::random_device rd;
@@ -302,14 +302,14 @@ int main() {
     std::copy(original_vec.begin(), original_vec.end(), original_arr);
 
     // Измерение std::execution::par
-    std::cout << "Измерение std::execution::par..." << std::endl;
+    std::cout << "Измерение std::execution::par vector..." << std::endl;
     double avg_time_par = measure_average_time(original_vec, EvenOddSort_Par, RUNS);
-    std::cout << "Среднее время (std::execution::par): " << avg_time_par << " ms" << std::endl;
+    std::cout << "Среднее время (std::execution::par vector): " << avg_time_par << " ms" << std::endl;
 
     // Измерение std::sort (обычная)
-    std::cout << "Измерение std::sort (без параллелизма)..." << std::endl;
+    std::cout << "Измерение std::sort vector (без параллелизма)..." << std::endl;
     double avg_time_seq = measure_average_time(original_vec, EvenOddSort_Seq, RUNS);
-    std::cout << "Среднее время (std::sort): " << avg_time_seq << " ms" << std::endl;
+    std::cout << "Среднее время (std::sort vector): " << avg_time_seq << " ms" << std::endl;
 
     // std::execution::par (обычный массив)
     std::cout << "Измерение std::execution::par (array)..." << std::endl;
@@ -317,7 +317,7 @@ int main() {
     std::cout << "Среднее время (std::execution::par, array): " << avg_time_arr << " ms" << std::endl;
 
     // обычный массив с parallel quicksort
-    std::cout << "Измерение parallel quicksort..." << std::endl;
+    std::cout << "Измерение parallel quicksort (array)..." << std::endl;
     double avg_time_quick = measure_average_time_array(original_arr, N, EvenOddSort_Quicksort, RUNS);
     std::cout << "Среднее время parallel quicksort(array): " << avg_time_quick << " ms" << std::endl;
 
